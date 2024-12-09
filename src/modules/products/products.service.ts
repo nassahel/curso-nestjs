@@ -34,7 +34,7 @@ export class ProductsService {
       where: { id },
       data: updateProductDto
     })
-    return updateProductDto;
+    return updatedProduct;
   }
 
   remove(id: string) {
