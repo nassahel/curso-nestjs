@@ -6,12 +6,14 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from '../prisma/prisma.module';
 import { envVaidationSchema } from 'src/config/env-validation';
 import { ProductsModule } from '../products/products.module';
+import { ProfilesModule } from '../profiles/profiles.module';
 
 
 @Module({
   imports: [
     UsersModule,
     ProductsModule,
+    ProfilesModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env'],

@@ -29,6 +29,9 @@ export class UsersService {
     const userFounded = this.prisma.user.findUnique({
       where: {
         id
+      },
+      include: {
+        profile: true
       }
     })
     return userFounded;

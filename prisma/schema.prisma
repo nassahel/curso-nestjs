@@ -14,27 +14,37 @@ datasource db {
 }
 
 model User {
-  id        String    @default(uuid()) @id
-  lastName  String
-  name      String
-  email     String    @unique
-  address   String
-  phone     String
+  id       String @id @default(uuid())
+  lastName String
+  name     String
+  email    String @unique
+  address  String
+  phone    String
 
-  isDeleted Boolean   @default(false)
+  isDeleted Boolean @default(false)
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  profile Profile?
 }
 
 model Product {
-  id            String    @default(uuid()) @id
-  name          String    @unique
-  description   String
-  image         String    
-  price         Float
-  isActive      Boolean   @default(true)
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String
+  image       String
+  price       Float
+  isActive    Boolean @default(true)
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  
+}
+
+model Profile {
+  id          String  @id @default(uuid())
+  biography   String
+  userId      String  @unique
+  user        User    @relation(fields: [userId], references: [id])
 }
