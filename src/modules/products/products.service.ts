@@ -22,6 +22,13 @@ export class ProductsService {
     return products;
   }
 
+  findByCategorie(id: string) {
+    const productByCategorie = this.prisma.product.findMany({
+      where: { categorieId: id }
+    })
+    return productByCategorie
+  }
+
   findOne(id: string) {
     const foundProduct = this.prisma.product.findUnique({
       where: { id }

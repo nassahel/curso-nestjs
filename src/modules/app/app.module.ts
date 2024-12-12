@@ -7,6 +7,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { envVaidationSchema } from 'src/config/env-validation';
 import { ProductsModule } from '../products/products.module';
 import { ProfilesModule } from '../profiles/profiles.module';
+import { CategoriesModule } from '../categories/categories.module';
 
 
 @Module({
@@ -14,6 +15,7 @@ import { ProfilesModule } from '../profiles/profiles.module';
     UsersModule,
     ProductsModule,
     ProfilesModule,
+    CategoriesModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env'],
