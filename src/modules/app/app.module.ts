@@ -4,10 +4,11 @@ import { AppService } from './app.service';
 import { UsersModule } from '../users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from '../prisma/prisma.module';
-import { envVaidationSchema } from 'src/config/env-validation';
+import { envVaidationSchema } from 'src/common/config/env-validation';
 import { ProductsModule } from '../products/products.module';
 import { ProfilesModule } from '../profiles/profiles.module';
 import { CategoriesModule } from '../categories/categories.module';
+import { AuthModule } from '../auth/auth.module';
 
 
 @Module({
@@ -16,6 +17,7 @@ import { CategoriesModule } from '../categories/categories.module';
     ProductsModule,
     ProfilesModule,
     CategoriesModule,
+    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env'],

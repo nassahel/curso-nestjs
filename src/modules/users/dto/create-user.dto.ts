@@ -29,4 +29,9 @@ export class CreateUserDto {
     @MinLength(3, { message: 'El telefono debe tener por lo menos 3 caracteres' })
     phone: string;
 
+    @IsString()
+    @IsNotEmpty({message:'La contraseña no puede estar vacia'})
+    @MinLength(6, {message: 'La longitud minima de la contraseña debe ser 6 caracteres'})
+    password: string 
+
 }

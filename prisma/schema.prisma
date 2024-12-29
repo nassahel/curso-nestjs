@@ -13,6 +13,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  SUPERADMIN
+  USER
+}
+
 model User {
   id       String @id @default(uuid())
   lastName String
@@ -20,13 +25,15 @@ model User {
   email    String @unique
   address  String
   phone    String
+  role     Role   @default(USER)
+  password String
 
   isDeleted Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profile   Profile?
+  profile  Profile?
   products Product[]
 }
 
@@ -40,7 +47,7 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  categorie Categorie? @relation(fields: [categorieId], references: [id])
+  categorie   Categorie? @relation(fields: [categorieId], references: [id])
   categorieId String?
 
   users User[]
@@ -54,9 +61,9 @@ model Profile {
 }
 
 model Categorie {
-  id        String   @id @default(uuid())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  products Product[]
+  id        String    @id @default(uuid())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
 }
