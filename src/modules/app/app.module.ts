@@ -13,16 +13,16 @@ import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
-    UsersModule,
-    ProductsModule,
-    ProfilesModule,
-    CategoriesModule,
-    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env'],
       validationSchema: envVaidationSchema
     }),
+    UsersModule,
+    ProductsModule,
+    ProfilesModule,
+    CategoriesModule,
+    AuthModule,
     PrismaModule,
   ],
   controllers: [AppController],

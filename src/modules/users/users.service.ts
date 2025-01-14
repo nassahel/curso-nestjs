@@ -2,12 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { AwsService } from '../aws/aws.service';
 
 
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) { }
+
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly awsService: AwsService,
+  ) { }
 
   create(createUserDto: CreateUserDto) {
     const user = this.prisma.user.create({
@@ -52,4 +57,25 @@ export class UsersService {
     })
     return softDeletedUser;
   }
+
+
+  async updateUser(id: string, updateUserDto: UpdateUserDto, file: Express.Multer.File,) {
+    console.log('updateUserDto', updateUserDto);
+    console.log('id', id);
+    const url = await this.awsService.uploadFile(file, id);
+    const user = await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: { ...updateUserDto, address: url },
+    });
+    console.log('url', url);
+    
+    return {
+      user,
+      url
+    };
+  }
+
+
 }
